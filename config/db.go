@@ -2,14 +2,14 @@ package db
 
 import (
 	"fmt"
-	"github.com/joho/godotenv"
-	"gorm.io/driver/postgres"
-	"gorm.io/gorm"
-	"gorm.io/gorm/logger"
 	"log"
 	"os"
 
 	"github.com/KPWithCode/hurd/models"
+	"github.com/joho/godotenv"
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
 )
 
 var DB *gorm.DB
@@ -38,7 +38,7 @@ func Connect() {
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{
 		Logger: logger.Default.LogMode(logger.Info),
 	})
-	db.AutoMigrate(&models.User{})
+	db.Debug().AutoMigrate(&models.UserModel{})
 	// makes db a global variable as DB was declared outside of function. ex: Now usable in User controller
 	DB = db
 	if err != nil {
